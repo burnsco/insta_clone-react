@@ -7,10 +7,10 @@
 * [x] Make basic post and comment submit implementations
 * [x] Node Rest API (crud)
 * [x] Create dummy db in node with same functionality as mongodb
-* [ ] Create Post and Comment Schema/Models
+* [x] Create Post and Comment Schema/Models
 * [x] Move that implementation to mongo
 * [x] Create post and comments and insert properly into mongo
-* [ ] Create User Schema/Model
+* [x] Create User Schema/Model
 * [ ] Register User
 * [ ] Use Lodash
 * [ ] Hash Password
@@ -25,7 +25,8 @@
 * [ ] logging out users
 * [ ] role based auth
 * [ ] testing auth (again)
-* [ ] ...more to come
+* [ ] Refactor / Add lots of validation (mongo, node, joi, react)
+* [ ] Make sure you can't have multiple accounts
 
 ## TODOS
 
