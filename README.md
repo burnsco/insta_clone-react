@@ -11,9 +11,9 @@
 * [x] Move that implementation to mongo
 * [x] Create post and comments and insert properly into mongo
 * [x] Create User Schema/Model
-* [ ] Register User
-* [ ] Use Lodash
-* [ ] Hash Password
+* [x] Register User
+* [x] Use Lodash
+* [x] Hash Password
 * [ ] Auth User
 * [ ] Test Auth
 * [ ] Generate Auth Token

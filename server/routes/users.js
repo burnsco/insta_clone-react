@@ -1,15 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../db')
-const _ = require('lodash')
+const usersController = require('../controllers/users.js')
 
-// CREATE USER
-router.post('/users', async (req, res) => {
-  let user = await db.User.findOne({ email: req.body.email })
-  if (user) return res.status(400).send('email taken')
-  db.createUser(_.pick(req.body, ['email', 'username', 'password']))
-    .then(response => res.json(response))
-    .catch(err => res.json(err))
-})
+router.post('/signup', usersController.signupUser)
+router.post('/login', usersController.loginUser)
 
 module.exports = router
