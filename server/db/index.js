@@ -1,9 +1,6 @@
 let mongoose = require('mongoose')
-let mongoDB = 'mongodb://localhost:27017/instascram' || process.env.DB
-mongoose
-  .connect(mongoDB, { useNewUrlParser: true, useCreateIndex: true })
-  .then(() => console.log('[*** MongoDB Connected ***] Port: 27017'))
-  .catch(err => console.log(err))
+const _ = require('lodash')
+const bcrypt = require('bcrypt')
 
 const User = mongoose.model(
   'User',
@@ -46,58 +43,40 @@ const Post = mongoose.model(
 )
 
 async function getPosts() {
-  try {
-    const posts = await Post.find()
-    return posts
-  } catch (ex) {
-    return ex
-  }
+  const posts = await Post.find()
+  return posts
 }
 
-async function createPost({ author, image, likes, body, comments, date }) {
+async function createPost(newPost) {
   const post = new Post({
-    author,
-    image,
-    likes,
-    body,
-    comments,
-    date
+    ...newPost
   })
-  try {
-    const result = await post.save()
-    return result
-  } catch (ex) {
-    return ex
-  }
+
+  const result = await post.save()
+  return result
 }
 
-async function createUser({ email, username, password }) {
+async function createUser(newUser) {
+  const hashedPassword = bcrypt.hashSync(newUser.password.trim(), 12)
+
   const user = new User({
-    email,
-    username,
-    password
+    email: newUser.email,
+    username: newUser.username,
+    password: hashedPassword
   })
-  try {
-    const result = await user.save()
-    return result
-  } catch (ex) {
-    return ex
-  }
+  const result = await user.save()
+  return _.pick(result, ['_id', 'email', 'username'])
 }
 
 async function addComment(id, { author, body, date }) {
-  try {
-    const changedPost = await Post.findById(id)
-    changedPost.comments.push({
-      author,
-      body,
-      date
-    })
-    changedPost.save()
-    return changedPost
-  } catch (ex) {
-    return ex
-  }
+  const changedPost = await Post.findById(id)
+  changedPost.comments.push({
+    author,
+    body,
+    date
+  })
+  changedPost.save()
+  return changedPost
 }
 
-module.exports = { createPost, getPosts, addComment, createUser }
+module.exports = { createPost, getPosts, addComment, createUser, User }
