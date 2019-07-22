@@ -1,8 +1,18 @@
 const { User, validate } = require('../models/user.js')
 const _ = require('lodash')
-const config = require('config')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+
+exports.getUser = async (req, res) => {
+  let user = await User.findById(req.user._id).select('-password')
+  if (!user) return res.status(404).send('user does not exist')
+  res.send(_.pick(user, ['_id', 'username', 'email']))
+}
+
+exports.getUsers = async (req, res, next) => {
+  const users = await User.find().select('-password')
+  res.send(users)
+  next()
+}
 
 exports.signupUser = async (req, res) => {
   const { error } = validate(req.body)

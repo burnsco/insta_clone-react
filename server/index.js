@@ -1,6 +1,5 @@
 require('dotenv').config()
 const config = require('config')
-const error = require('./error')
 const express = require('express')
 const mongoose = require('mongoose')
 const helmet = require('helmet')
@@ -27,9 +26,6 @@ app.use(express.json())
 
 app.use('/api', postRoutes)
 app.use('/auth', userRoutes)
-
-app.use(error.notFound)
-app.use(error.other)
 
 const port = 5000 || process.env.PORT
 app.listen(port, () => console.log(`[*** App Connected ***] Port: ${port}]`))

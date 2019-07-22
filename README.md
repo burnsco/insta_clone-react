@@ -15,7 +15,7 @@
 * [x] Use Lodash
 * [x] Hash Password
 * [x] Auth User
-* [ ] Test Auth
+* [x] Test Auth
 * [x] Generate Auth Token
 * [x] Set Response Headers
 * [x] Encapsulate logic in mongoose model
@@ -26,7 +26,6 @@
 * [ ] role based auth
 * [ ] testing auth (again)
 * [ ] Refactor / Add lots of validation (mongo, node, joi, react)
-* [ ] Make sure you can't have multiple accounts
 * [ ] Add Sign up Page
 * [ ] Add Login Page
 * [ ] Add Router
