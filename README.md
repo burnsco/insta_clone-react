@@ -14,19 +14,25 @@
 * [x] Register User
 * [x] Use Lodash
 * [x] Hash Password
-* [ ] Auth User
+* [x] Auth User
 * [ ] Test Auth
-* [ ] Generate Auth Token
-* [ ] Set Response Headers
-* [ ] Encapsulate logic in mongoose model
-* [ ] Add auth middleware
-* [ ] Add protected routes
+* [x] Generate Auth Token
+* [x] Set Response Headers
+* [x] Encapsulate logic in mongoose model
+* [x] Add auth middleware
+* [x] Add protected routes
 * [ ] get current user
 * [ ] logging out users
 * [ ] role based auth
 * [ ] testing auth (again)
 * [ ] Refactor / Add lots of validation (mongo, node, joi, react)
 * [ ] Make sure you can't have multiple accounts
+* [ ] Add Sign up Page
+* [ ] Add Login Page
+* [ ] Add Router
+* [ ] Protect Routes
+* [ ] Add Admin stuff
+* [ ] Show pages depending on User
 
 ## TODOS
 

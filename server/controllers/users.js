@@ -1,6 +1,8 @@
 const { User, validate } = require('../models/user.js')
 const _ = require('lodash')
+const config = require('config')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 exports.signupUser = async (req, res) => {
   const { error } = validate(req.body)
@@ -11,9 +13,13 @@ exports.signupUser = async (req, res) => {
 
   user = new User(_.pick(req.body, ['username', 'email', 'password']))
   const salt = await bcrypt.genSaltSync(12)
-  user.password = await bcrypt.hashSync(newUser.password.trim(), salt)
+  user.password = await bcrypt.hashSync(user.password.trim(), salt)
   await user.save()
-  res.json(user)
+
+  const token = user.generateAuthToken()
+  res
+    .header('x-auth-token', token)
+    .send(_.pick(user, ['_id', 'username', 'email']))
 }
 
 exports.loginUser = async (req, res) => {
@@ -29,7 +35,8 @@ exports.loginUser = async (req, res) => {
   )
   if (!validPassword) return res.status(400).send('invalid email or password')
 
-  // generate token send back details
-
-  res.json(user)
+  const token = user.generateAuthToken()
+  res
+    .header('x-auth-token', token)
+    .send(_.pick(user, ['_id', 'username', 'email']))
 }

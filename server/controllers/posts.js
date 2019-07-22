@@ -3,31 +3,29 @@ const { Post } = require('../models/post.js')
 
 exports.getPosts = async (req, res) => {
   const posts = await Post.find()
-  if (posts.length < 1) return res.status(404).send('there are no posts')
-
   res.send(posts)
 }
 
 exports.createPost = async (req, res) => {
-  const post = new Post(_.pick(req.body, ['author', 'image', 'likes', 'body']))
-  await post.save()
+  let post = new Post(_.pick(req.body, ['author', 'image', 'likes', 'body']))
+  post = await post.save()
 
-  res.send('post created')
+  res.send(post)
 }
 
 exports.createComment = async (req, res) => {
   let id = req.params.id
-  let { author, body, date } = req.body
+  let { author, body } = req.body
 
   const post = await Post.findById(id)
+  if (!post) return res.status(404).send('this post does not exist')
+
   post.comments.push({
     author,
     body,
     date: Date.now()
   })
-  await post.save()
+  post = await post.save()
 
-  if (!post) return res.status(404).send('this post does not exist')
-
-  res.send('comment created')
+  res.send(post)
 }
