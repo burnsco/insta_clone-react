@@ -21,18 +21,19 @@
 * [x] Encapsulate logic in mongoose model
 * [x] Add auth middleware
 * [x] Add protected routes
-* [ ] get current user
-* [ ] logging out users
-* [ ] role based auth
-* [ ] testing auth (again)
-* [ ] Refactor / Add lots of validation (mongo, node, joi, react)
+* [ ] Add Router
 * [ ] Add Sign up Page
 * [ ] Add Login Page
-* [ ] Add Router
+* [ ] Refactor / Add lots of validation (mongo, node, joi, react)
 * [ ] Protect Routes
 * [ ] Add Admin stuff
-* [ ] Show pages depending on User
+* [ ] Show Sign-Up page unless logged in
+* [ ] Final Testing
+* [ ] Final CSS / Other Tweaks
 
-## TODOS
+## Extras
 
-## IDEAS
+* [ ] Add Friends
+* [ ] Add Messages
+* [ ] Add Chat?
+* [ ] Socket.IO ?

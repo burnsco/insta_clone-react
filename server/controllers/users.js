@@ -8,10 +8,9 @@ exports.getUser = async (req, res) => {
   res.send(_.pick(user, ['_id', 'username', 'email']))
 }
 
-exports.getUsers = async (req, res, next) => {
+exports.getUsers = async (req, res) => {
   const users = await User.find().select('-password')
   res.send(users)
-  next()
 }
 
 exports.signupUser = async (req, res) => {
@@ -33,9 +32,6 @@ exports.signupUser = async (req, res) => {
 }
 
 exports.loginUser = async (req, res) => {
-  const { error } = validate(req.body)
-  if (error) return res.status(400).send(error.details[0].message)
-
   let user = await User.findOne({ email: req.body.email })
   if (!user) return res.status(400).send('invalid email or password')
 
@@ -46,7 +42,9 @@ exports.loginUser = async (req, res) => {
   if (!validPassword) return res.status(400).send('invalid email or password')
 
   const token = user.generateAuthToken()
+  user.token = token
   res
     .header('x-auth-token', token)
-    .send(_.pick(user, ['_id', 'username', 'email']))
+    .header('access-control-expose-headers', 'x-auth-token')
+    .send(_.pick(user, ['_id', 'username', 'email', 'token']))
 }

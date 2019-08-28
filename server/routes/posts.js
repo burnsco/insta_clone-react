@@ -3,8 +3,8 @@ const router = express.Router()
 const postsController = require('../controllers/posts.js')
 const auth = require('../middleware/auth')
 
-router.get('/posts', auth, postsController.getPosts)
-router.post('/posts', auth, postsController.createPost)
-router.put('/posts/:id', auth, postsController.createComment)
+router.get('/posts', postsController.getPosts)
+router.post('/posts', postsController.createPost)
+router.put('/posts/:id', postsController.createComment)
 
 module.exports = router

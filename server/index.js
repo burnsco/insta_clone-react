@@ -2,6 +2,7 @@ require('dotenv').config()
 const config = require('config')
 const express = require('express')
 const mongoose = require('mongoose')
+const errorHandler = require('./middleware/error')
 const helmet = require('helmet')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -27,5 +28,8 @@ app.use(express.json())
 app.use('/api', postRoutes)
 app.use('/auth', userRoutes)
 
+app.use(errorHandler.notFound)
+app.use(errorHandler.other)
+
 const port = 5000 || process.env.PORT
-app.listen(port, () => console.log(`[*** App Connected ***] Port: ${port}]`))
+app.listen(port, () => console.log(`[*** App Connected ***] Port: ${port}`))

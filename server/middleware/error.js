@@ -4,7 +4,7 @@ module.exports = {
     const error = new Error('Not found - ' + req.originalUrl)
     next(error)
   },
-  other: (err, req, res) => {
+  other: (err, req, res, next) => {
     res.status(res.statusCode || 500)
     res.json({ message: err.message, stack: err.stack })
   }

@@ -17,7 +17,7 @@ exports.createComment = async (req, res) => {
   let id = req.params.id
   let { author, body } = req.body
 
-  const post = await Post.findById(id)
+  let post = await Post.findById(id)
   if (!post) return res.status(404).send('this post does not exist')
 
   post.comments.push({
